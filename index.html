@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Document</title>
+</head>
+<header class="jumbotron">
+    <h1 class="display-5 d-flex justify-content-center">Weather</h1>
+</header>
+
+<main class="container">
+    <form class="citySearchInput form-row">
+        <div class="col-6">
+            <div class="row weatherPageTitle">
+                <h2 class="col-6">Search for a City:</h2>
+            </div>
+            <!-- user lat -->
+            <input type="text" id="userLat" class="form-control col-6 mt-3" placeholder="Enter Lat">
+
+            <!-- user lat -->
+            <input type="text" id="userLat" class="form-control col-6 mt-3" placeholder="Enter Lon">
+
+            <!-- search button -->
+                <div class="mt-3">
+                    <input type="submit" class="userInputBtn btn-success" value="Search">
+                </div> 
+        </div>
+    </form>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="./assets/js/weatherDashLogic.js"></script>
+<script src="./assets/js/localStorage.js"></script>
+</body>
+
+</html>
