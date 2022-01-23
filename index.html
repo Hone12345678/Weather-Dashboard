@@ -9,18 +9,20 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Document</title>
 </head>
+<!-- basic header containing "Weather Title" -->
 <header class="jumbotron">
     <h1 class="display-5 d-flex justify-content-center">Weather</h1>
 </header>
 
+ 
 <main class="container">
     <form class="citySearchInput form-row">
         <div class="col-6">
             <div class="row weatherPageTitle">
-                <h2 class="col-6">Search for a City:</h2>
+                <h2 class="col-10">Search for a City:</h2>
             </div>
-            <!-- user lat -->
-            <input type="text" id="searchInput" class="form-control col-6 mt-3" placeholder="Enter City Name">
+        <!-- search bar for city input -->
+            <input type="text" id="searchInput" class="form-control col-10 mt-3" placeholder="Enter City Name">
 
             <!-- search button -->
                 <div class="mt-3">
@@ -29,9 +31,11 @@
                 </div> 
         </div>
     </form>
+<!-- contetnts from the api return placed here -->
+    <div id="displayData" class=" card col-10">
+        
 
-    <div id="displayData">
-
+        
     </div>
 
     <div class=searchHistory>

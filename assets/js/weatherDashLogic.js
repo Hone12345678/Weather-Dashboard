@@ -5,7 +5,8 @@ var searchInput = document.querySelector("#searchInput")
 var searchHist = []
 var displayDataEl  = document.getElementById("displayData")
 
-
+// access openweathermap api to get city coordinates base on the city name searched by the user
+// corrdinets will be used (lat and Long) to make an api call that returns local weather based on location
 var getCoordinates = function (city) {
     var weatherAPI = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f16d7083a167785de27297dbf5a2e73c`;
     fetch(weatherAPI)
@@ -16,14 +17,14 @@ var getCoordinates = function (city) {
             console.log("data",data)
             getWeather(data);
             // renderItem(data);
-            // searchHist(city)
+            setSearchHist(city)
         })
         .catch(function (err) {
             console.log(err)
         })
-
 };
 
+// allows the value from the search bar to be trimmed and placed as the teplate literal in the getGetCoordinates function to obtain lat and long
 var handleFormSubmit = function (event) {
     event.preventDefault()
     if (!searchInput.value) {
@@ -34,8 +35,10 @@ var handleFormSubmit = function (event) {
     console.log(searchValue)
 }
 
+//event listener allowing the user to hit search and using the API calls to return data based on the city entered into the search bar
 searchForm.addEventListener("submit", handleFormSubmit)
 
+// takes the lat long data brought in by the handleFormSubmit and uses a for loop to access the 5 day forcast
 function getWeather(data) {
     var lat = data.coord.lat
     var lon = data.coord.lon
@@ -49,14 +52,26 @@ function getWeather(data) {
             console.log("data:", data)
             renderItem(data);
         })
+    
         .catch(function (err) {
             console.log(err)
         })
+
+        // dynamicly generated html from the data returned from the api call
         function renderItem(data) {
-            for (let i = 0; i < data.daily.length; i++) {
-        
+            for (let i = 0; i < data.daily.length-3; i++) {
+
+                var weeklyForcasts = $("<div></div>");
+                weeklyForcasts.addClass("col-10 card deck")
+
                 var displayWeatherEl = $("<div></div>");
                 displayWeatherEl.addClass("border border-dark col-sm-12 mb-3 bckgrnd"); 
+                weeklyForcasts.appendTo(displayWeatherEl)
+
+                var dateTimeEL = $("<div></div>");
+                dateTimeEL.text(data.daily[i].dt)
+                dateTimeEL.appendTo(displayWeatherEl)
+                displayWeatherEl.appendTo(displayDataEl)
 
                 var tempEl = $("<div></div>");
                 var tempval = (data.daily[i].temp.day)
@@ -78,32 +93,30 @@ function getWeather(data) {
                 humidityEL.appendTo(displayWeatherEl)
                 displayWeatherEl.appendTo(displayDataEl)
             }
+            
         }
+        
         
 };
 
-// function renderItem(data) {
-//     for (let i = 0; i < data.daily.length; i++) {
 
-//         var diplayWeatherEl = $("<div></div>");
-//         diplayWeatherEl.addClass("border border-dark col-sm-12 mb-3 bckgrnd");
+//Local Hist in progress
+function setSearchHist(city) {
+    searchHist.push(city)
+    localStorage.setItem("search", JSON.stringify(searchHist))
 
-//         var humidityEL = $("<div></div>");
-//         humidityEL.text(data.daily[i].humidity)
-//         humidityEL.appendTo(diplayWeatherEl)
-//     }
-// }
+}
 
+function accessLocalStore() {
+var tempStore = localStorage.getItem("search")
+if (tempStore){
+    
+}
 
-
-
-
-
-
-// function serchHist(city) {
-//     searchHist.push(city)
-//     localStorage.setItem("search", JSON.stringify(searchHist))
+}
 
 
-
-// }
+function renderSearchHist() {
+    var tempStore = localStorage.getItem("search")
+    }
+    
